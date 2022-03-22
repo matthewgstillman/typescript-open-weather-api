@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.weatherContainer {
+  border: 2px solid black;
+  background-color: #bdd4e7;
+  background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%);
+  width: 62%;
+  box-shadow: 5px 5px #888888;
+  border-radius: 10px;
+}
+
+.submitButton {
+  border: 2px solid black;
+  border-radius: 7px;
+}
