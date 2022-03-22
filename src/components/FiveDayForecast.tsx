@@ -27,7 +27,6 @@ const FiveDayForecast: FC<IApplicationFiveDayForecastWeatherProps> = ({
     fetch(fiveDayUrl)
       .then((res) => res.json())
       .then((data) => setFiveDayWeatherData(data));
-    // .then()
   };
 
   useEffect(() => {
@@ -37,21 +36,12 @@ const FiveDayForecast: FC<IApplicationFiveDayForecastWeatherProps> = ({
 
   const convertUnixDate = (unixTimestamp: number) => {
     const date = new Date(unixTimestamp * 1000);
-    // console.log(`Date: ${date}`);
-    // const hours = date.getHours();
-    // const minutes = date.getMinutes().toString();
-    // const seconds = "0" + date.getSeconds().toString();
-    // console.log(seconds);
-    // const formattedTime =
-    //   hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
-    // console.log(`Formatted Time: ${formattedTime}`);
     return date;
   };
 
   if (fiveDayWeatherData) {
     console.log(`Five Day: ${fiveDayWeatherData.list[0].main["temp"]}`);
   }
-  convertUnixDate(1647918000);
 
   return <div></div>;
 };

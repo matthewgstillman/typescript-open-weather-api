@@ -4,6 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import "./App.css";
 import Weather from "./components/Weather";
 import FiveDayForecast from "./components/FiveDayForecast";
+import UpdatedFiveDay from "./components/UpdatedFiveDay";
 
 interface Coordinates {
   lat: number;
@@ -21,8 +22,10 @@ const App: FC = () => {
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
   );
   const [fiveDayUrl, setFiveDayUrl] = useState<string>(
-    // `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}}&units=imperial`
-    `https://api.openweathermap.org/data/2.5/forecast?lat=40.7726517&lon=-111.8583302&appid=f27aff99dd5a477a3a129ed490b4f7f1&units=imperial`
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
+  );
+  const [updatedFiveDayUrl, setUpdateFiveDayUrl] = useState<string>(
+    `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_FIVE_DAY_FORECAST_API_KEY}&q=${lat},${lng}&days=5&aqi=no&alerts=no`
   );
   const [coordsSubmitted, setCoordsSubmitted] = useState<boolean>(false);
 
@@ -42,8 +45,7 @@ const App: FC = () => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
     );
     setFiveDayUrl(
-      // `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}}&units=imperial`
-      `https://api.openweathermap.org/data/2.5/forecast?lat=40.7726517&lon=-111.8583302&appid=f27aff99dd5a477a3a129ed490b4f7f1&units=imperial`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
     );
     setLat(lat);
     setLng(lng);
@@ -74,7 +76,14 @@ const App: FC = () => {
             setLat={setLat}
             setLng={setLng}
           />
-          <FiveDayForecast
+          {/* <FiveDayForecast
+            lat={lat}
+            lng={lng}
+            fiveDayUrl={fiveDayUrl}
+            setLat={setLat}
+            setLng={setLng}
+          /> */}
+          <UpdatedFiveDay
             lat={lat}
             lng={lng}
             fiveDayUrl={fiveDayUrl}
@@ -95,13 +104,6 @@ const App: FC = () => {
           <br />
           <br />
           <br />
-          {/* <Weather
-            lat={lat}
-            lng={lng}
-            url={url}
-            setLat={setLat}
-            setLng={setLng}
-          /> */}
         </div>
       )}
     </div>
