@@ -22,7 +22,7 @@ const App: FC = () => {
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
   );
   const [fiveDayUrl, setFiveDayUrl] = useState<string>(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,hourly,minutely,alerts&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
   );
   const [updatedFiveDayUrl, setUpdateFiveDayUrl] = useState<string>(
     `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_FIVE_DAY_FORECAST_API_KEY}&q=${lat},${lng}&days=5&aqi=no&alerts=no`
@@ -45,7 +45,7 @@ const App: FC = () => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
     );
     setFiveDayUrl(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,hourly,minutely,alerts&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
     );
     setLat(lat);
     setLng(lng);
@@ -76,20 +76,20 @@ const App: FC = () => {
             setLat={setLat}
             setLng={setLng}
           />
-          {/* <FiveDayForecast
-            lat={lat}
-            lng={lng}
-            fiveDayUrl={fiveDayUrl}
-            setLat={setLat}
-            setLng={setLng}
-          /> */}
-          <UpdatedFiveDay
+          <FiveDayForecast
             lat={lat}
             lng={lng}
             fiveDayUrl={fiveDayUrl}
             setLat={setLat}
             setLng={setLng}
           />
+          {/* <UpdatedFiveDay
+            lat={lat}
+            lng={lng}
+            fiveDayUrl={fiveDayUrl}
+            setLat={setLat}
+            setLng={setLng}
+          /> */}
         </div>
       ) : (
         <div>

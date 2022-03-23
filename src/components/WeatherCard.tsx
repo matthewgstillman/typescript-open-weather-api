@@ -12,7 +12,7 @@ const WeatherCard: FC<WeatherData | null> = ({ name, main, weather, wind }) => {
             <h2>{name}</h2>
             {/* <h3>{date}</h3> */}
             <hr></hr>
-            <h1>{main.temp} F</h1>
+            <h1>{Math.round(main.temp)}ºF</h1>
             {weather[0].description}
             <hr></hr>
             <h3>Wind: {Math.round(wind.speed)} MPH</h3>

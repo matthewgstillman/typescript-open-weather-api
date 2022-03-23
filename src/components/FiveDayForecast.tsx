@@ -20,13 +20,56 @@ const FiveDayForecast: FC<IApplicationFiveDayForecastWeatherProps> = ({
   const [
     fiveDayWeatherData,
     setFiveDayWeatherData,
-  ] = useState<FiveDayWeather | null>(null);
+  ] = useState<NewFiveDay | null>(null);
+  const [fiveDayWeatherStringArray, setFiveDayWeatherStringArray] = useState<
+    string[] | ""
+  >("");
 
   const getData = (fiveDayUrl: string) => {
     console.log(`Five Day URL is ${fiveDayUrl}`);
     fetch(fiveDayUrl)
       .then((res) => res.json())
-      .then((data) => setFiveDayWeatherData(data));
+      // .then((data) => setFiveDayWeatherData(data))
+      // .then(function)
+      .then(function (data) {
+        const fdayArray: string[] = [];
+        data.daily.forEach(
+          (
+            value: {
+              dt: number;
+              weather: [
+                { id: number; main: string; description: string; icon: string }
+              ];
+              temp: {
+                day: number;
+                night: number;
+                eve: number;
+                morn: number;
+              };
+            },
+            index: number
+          ) => {
+            if (index > 0) {
+              let dayname = new Date(value.dt * 1000).toLocaleDateString("en", {
+                weekday: "long",
+              });
+              if (value.weather !== undefined) {
+                let icon = value.weather[0].icon;
+              }
+              if (value.temp !== undefined) {
+                let temp = value.temp.day.toFixed(0);
+              }
+              const fday = `<div class="forecast-day">
+              <p>${dayname}</p>
+              <div class="forecast-day--temp">${value.temp}<sup>°C</sup></div>
+            </div>`;
+              fdayArray.push(fday);
+            }
+          },
+          setFiveDayWeatherStringArray(fdayArray)
+        );
+        console.log(fiveDayWeatherStringArray);
+      });
   };
 
   useEffect(() => {
@@ -40,7 +83,7 @@ const FiveDayForecast: FC<IApplicationFiveDayForecastWeatherProps> = ({
   };
 
   if (fiveDayWeatherData) {
-    console.log(`Five Day: ${fiveDayWeatherData.list[0].main["temp"]}`);
+    console.log(`Five Day: ${JSON.stringify(fiveDayWeatherData)}`);
   }
 
   return <div></div>;

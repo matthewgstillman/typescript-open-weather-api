@@ -27,7 +27,8 @@ const UpdatedFiveDay: FC<IApplicationUpdatedFiveDayForecastWeatherProps> = ({
     console.log(`Update Five dat URL is ${fiveDayUrl}`);
     fetch(fiveDayUrl)
       .then((res) => res.json())
-      .then((data) => setUpdatedFiveDayWeatherData(data));
+      .then((data) => console.log(JSON.stringify(data)));
+    //   .then((data) => setUpdatedFiveDayWeatherData(data));
   };
 
   useEffect(() => {
@@ -36,7 +37,9 @@ const UpdatedFiveDay: FC<IApplicationUpdatedFiveDayForecastWeatherProps> = ({
   }, [fiveDayUrl]);
 
   if (updatedFiveDayWeatherData) {
-    console.log(`Five Day: ${JSON.stringify(updatedFiveDayWeatherData)}`);
+    console.log(
+      `Five Day: ${JSON.stringify(updatedFiveDayWeatherData.forecast)}`
+    );
   }
 
   return <div></div>;
